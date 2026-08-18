@@ -142,7 +142,7 @@ export default function Home() {
     );
   }
 
-  if (!workspace && user?.role === "default") {
+  if (!workspace && ["default", "colaborador"].includes(user?.role)) {
     return <NoWorkspacesAssigned />;
   }
 

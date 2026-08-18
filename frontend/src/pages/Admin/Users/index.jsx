@@ -116,6 +116,10 @@ const ROLE_HINT = {
     "Can only send chats with workspaces they are added to by admin or managers.",
     "Cannot modify any settings at all.",
   ],
+  colaborador: [
+    "Can chat and manage documents only in workspaces they are added to by admin or managers.",
+    "Cannot access system settings, user management, or workspaces they were not added to.",
+  ],
   manager: [
     "Can view, create, and delete any workspaces and modify workspace-specific settings.",
     "Can create, update and invite new users to the instance.",

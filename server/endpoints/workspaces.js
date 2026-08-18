@@ -111,7 +111,8 @@ function workspaceEndpoints(app) {
     "/workspace/:slug/upload",
     [
       validatedRequest,
-      flexUserRoleValid([ROLES.admin, ROLES.manager]),
+      flexUserRoleValid([ROLES.admin, ROLES.manager, ROLES.colaborador]),
+      validWorkspaceSlug,
       handleFileUpload,
     ],
     async function (request, response) {
@@ -178,7 +179,11 @@ function workspaceEndpoints(app) {
 
   app.post(
     "/workspace/:slug/upload-link",
-    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager])],
+    [
+      validatedRequest,
+      flexUserRoleValid([ROLES.admin, ROLES.manager, ROLES.colaborador]),
+      validWorkspaceSlug,
+    ],
     async (request, response) => {
       try {
         const Collector = new CollectorApi();
@@ -221,7 +226,11 @@ function workspaceEndpoints(app) {
 
   app.post(
     "/workspace/:slug/update-embeddings",
-    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager])],
+    [
+      validatedRequest,
+      flexUserRoleValid([ROLES.admin, ROLES.manager, ROLES.colaborador]),
+      validWorkspaceSlug,
+    ],
     async (request, response) => {
       try {
         const user = await userFromSession(request, response);
@@ -784,7 +793,8 @@ function workspaceEndpoints(app) {
     "/workspace/:slug/upload-and-embed",
     [
       validatedRequest,
-      flexUserRoleValid([ROLES.admin, ROLES.manager]),
+      flexUserRoleValid([ROLES.admin, ROLES.manager, ROLES.colaborador]),
+      validWorkspaceSlug,
       handleFileUpload,
     ],
     async function (request, response) {
@@ -863,6 +873,7 @@ function workspaceEndpoints(app) {
     [
       validatedRequest,
       flexUserRoleValid([ROLES.admin, ROLES.manager]),
+      validWorkspaceSlug,
       handleFileUpload,
     ],
     async function (request, response) {

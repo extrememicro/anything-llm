@@ -8,6 +8,7 @@ permissions:
   contents: write
 jobs:
   deploy:
+    if: github.repository == 'Mintplex-Labs/anything-llm'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️

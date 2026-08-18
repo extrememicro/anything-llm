@@ -174,33 +174,35 @@ export default function ActiveWorkspaces() {
                                     className={`h-[20px] w-[20px] ${isActive ? "text-zinc-400 hover:text-white light:text-blue-700 light:group-hover/upload:text-blue-900" : "text-zinc-400 hover:text-white light:text-slate-600 light:group-hover/upload:text-slate-950"}`}
                                   />
                                 </button>
-                                <button
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    navigate(
-                                      isInWorkspaceSettings
-                                        ? paths.workspace.chat(workspace.slug)
-                                        : paths.workspace.settings.generalAppearance(
-                                            workspace.slug
-                                          )
-                                    );
-                                  }}
-                                  className={`group/gear rounded-md flex items-center justify-center ml-auto p-[2px] ${isActive ? "hover:bg-zinc-500 light:hover:bg-sky-800/30" : "hover:bg-zinc-500 light:hover:bg-slate-400"}`}
-                                  aria-label="General appearance settings"
-                                  data-tooltip-id="gear-workspace"
-                                  data-tooltip-content="General appearance settings"
-                                >
-                                  <GearSix
-                                    color={
-                                      isInWorkspaceSettings &&
-                                      workspace.slug === slug
-                                        ? "#46C8FF"
-                                        : undefined
-                                    }
-                                    className={`h-[20px] w-[20px] ${isActive ? "text-zinc-400 hover:text-white light:text-blue-700 light:group-hover/gear:text-blue-900" : "text-zinc-400 hover:text-white light:text-slate-600 light:group-hover/gear:text-slate-950"}`}
-                                  />
-                                </button>
+                                {["admin", "manager"].includes(user?.role) && (
+                                  <button
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      e.stopPropagation();
+                                      navigate(
+                                        isInWorkspaceSettings
+                                          ? paths.workspace.chat(workspace.slug)
+                                          : paths.workspace.settings.generalAppearance(
+                                              workspace.slug
+                                            )
+                                      );
+                                    }}
+                                    className={`group/gear rounded-md flex items-center justify-center ml-auto p-[2px] ${isActive ? "hover:bg-zinc-500 light:hover:bg-sky-800/30" : "hover:bg-zinc-500 light:hover:bg-slate-400"}`}
+                                    aria-label="General appearance settings"
+                                    data-tooltip-id="gear-workspace"
+                                    data-tooltip-content="General appearance settings"
+                                  >
+                                    <GearSix
+                                      color={
+                                        isInWorkspaceSettings &&
+                                        workspace.slug === slug
+                                          ? "#46C8FF"
+                                          : undefined
+                                      }
+                                      className={`h-[20px] w-[20px] ${isActive ? "text-zinc-400 hover:text-white light:text-blue-700 light:group-hover/gear:text-blue-900" : "text-zinc-400 hover:text-white light:text-slate-600 light:group-hover/gear:text-slate-950"}`}
+                                    />
+                                  </button>
+                                )}
                               </div>
                             )}
                           </div>

@@ -30,6 +30,7 @@ on:
 
 jobs:
   push_multi_platform_to_registries:
+    if: github.repository == 'Mintplex-Labs/anything-llm'
     name: Push Docker multi-platform image to multiple registries
     runs-on: ubuntu-22.04-arm
     permissions:

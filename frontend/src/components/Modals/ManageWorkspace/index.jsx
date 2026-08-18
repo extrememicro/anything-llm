@@ -95,7 +95,7 @@ const ManageWorkspace = ({ hideModal = noop, providedSlug = null }) => {
             </button>
           </div>
 
-          {user?.role !== "default" && (
+          {["admin", "manager"].includes(user?.role) && (
             <ModalTabSwitcher
               selectedTab={selectedTab}
               setSelectedTab={setSelectedTab}
@@ -152,7 +152,7 @@ export function useManageWorkspaceModal() {
   const [showing, setShowing] = useState(false);
 
   function showModal() {
-    if (user?.role !== "default") {
+    if (["admin", "manager"].includes(user?.role)) {
       setShowing(true);
     }
   }

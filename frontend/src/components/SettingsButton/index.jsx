@@ -8,7 +8,7 @@ export default function SettingsButton() {
   const isInSettings = !!useMatch("/settings/*");
   const { user } = useUser();
 
-  if (user && user?.role === "default") return null;
+  if (user && !["admin", "manager"].includes(user?.role)) return null;
 
   if (isInSettings)
     return (

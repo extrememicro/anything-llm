@@ -14,7 +14,7 @@ jobs:
   cleanup-manual:
     name: Delete QA GHCR image tag (manual)
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch'
+    if: github.repository == 'Mintplex-Labs/anything-llm' && github.event_name == 'workflow_dispatch'
     permissions:
       packages: write
     steps:
@@ -51,8 +51,9 @@ jobs:
     name: Delete QA GHCR image tag (auto)
     runs-on: ubuntu-latest
     if: >-
-      (github.event.action == 'closed' && contains(github.event.pull_request.labels.*.name, 'PR: Ready for QA')) ||
-      (github.event.action == 'unlabeled' && github.event.label.name == 'PR: Ready for QA')
+      github.repository == 'Mintplex-Labs/anything-llm' &&
+      ((github.event.action == 'closed' && contains(github.event.pull_request.labels.*.name, 'PR: Ready for QA')) ||
+      (github.event.action == 'unlabeled' && github.event.label.name == 'PR: Ready for QA'))
     permissions:
       packages: write
     steps:

@@ -4,9 +4,10 @@ const ROLES = {
   all: "<all>",
   admin: "admin",
   manager: "manager",
+  colaborador: "colaborador",
   default: "default",
 };
-const DEFAULT_ROLES = [ROLES.admin, ROLES.admin];
+const DEFAULT_ROLES = [ROLES.admin, ROLES.manager];
 
 /**
  * Explicitly check that single user mode is enabled as well as that the
@@ -56,7 +57,7 @@ function strictMultiUserRoleValid(allowedRoles = DEFAULT_ROLES) {
  * @returns {function}
  */
 function flexUserRoleValid(allowedRoles = DEFAULT_ROLES) {
-  return async (request, response, next) => {
+  const middleware = async (request, response, next) => {
     // If the access-control is allowable for all - skip validations and continue;
     // It does not matter if multi-user or not.
     if (allowedRoles.includes(ROLES.all)) {
@@ -81,6 +82,8 @@ function flexUserRoleValid(allowedRoles = DEFAULT_ROLES) {
     }
     return response.sendStatus(401).end();
   };
+  middleware.allowedRoles = allowedRoles;
+  return middleware;
 }
 
 // Middleware check on a public route if the instance is in a valid

@@ -1,0 +1,35 @@
+name: Update from upstream
+
+on:
+  schedule:
+    - cron: "17 5 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    if: github.repository == 'extrememicro/anything-llm'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: pyming
+          fetch-depth: 0
+      - name: Merge latest stable upstream release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git remote add upstream https://github.com/Mintplex-Labs/anything-llm.git
+          tag="$(gh api repos/Mintplex-Labs/anything-llm/releases/latest --jq .tag_name)"
+          git fetch upstream "refs/tags/${tag}:refs/tags/${tag}"
+          branch="automation/upstream-${tag}"
+          git switch -c "$branch"
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git merge --no-edit "$tag" || { git merge --abort; echo "Upstream merge conflicts with PYMING customizations." >&2; exit 1; }
+          git push --force-with-lease origin "$branch"
+          gh pr create --base pyming --head "$branch" --title "Merge upstream ${tag}" --body "Automated merge of the latest stable AnythingLLM release into the PYMING branch." || gh pr edit "$branch" --title "Merge upstream ${tag}" --body "Automated merge of the latest stable AnythingLLM release into the PYMING branch."

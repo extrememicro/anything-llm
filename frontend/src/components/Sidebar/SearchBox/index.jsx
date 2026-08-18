@@ -189,7 +189,7 @@ function SearchResultItem({ to, name, hint }) {
 
 function ShortWidthNewWorkspaceButton({ user, showNewWsModal }) {
   const { t } = useTranslation();
-  if (!!user && user?.role === "default") return null;
+  if (!!user && !["admin", "manager"].includes(user?.role)) return null;
 
   return (
     <>

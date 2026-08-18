@@ -158,7 +158,7 @@ export function SidebarMobileHeader() {
                   style={{ objectFit: "contain" }}
                 />
               </div>
-              {(!user || user?.role !== "default") && (
+              {(!user || ["admin", "manager"].includes(user?.role)) && (
                 <div className="flex gap-x-2 items-center text-slate-500 shink-0">
                   <SettingsButton />
                 </div>
@@ -190,7 +190,7 @@ export function SidebarMobileHeader() {
 
 function NewWorkspaceButton({ user, showNewWsModal }) {
   const { t } = useTranslation();
-  if (!!user && user?.role === "default") return null;
+  if (!!user && !["admin", "manager"].includes(user?.role)) return null;
 
   return (
     <div className="flex gap-x-2 items-center justify-between">
