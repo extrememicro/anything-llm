@@ -20,7 +20,8 @@ export default function ParsedFilesMenu({
   threadSlug = null,
 }) {
   const { user } = useUser();
-  const canEmbed = !user || user.role !== "default";
+  const canEmbed =
+    !user || ["admin", "manager", "colaborador"].includes(user.role);
   const initialContextWindowLimitExceeded =
     contextWindow &&
     currentTokens >= contextWindow * Workspace.maxContextWindowLimit;

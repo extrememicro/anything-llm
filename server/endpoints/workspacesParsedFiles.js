@@ -122,8 +122,8 @@ function workspaceParsedFilesEndpoints(app) {
     [
       validatedRequest,
       flexUserRoleValid([ROLES.all]),
-      handleFileUpload,
       validWorkspaceSlug,
+      handleFileUpload,
     ],
     async function (request, response) {
       try {

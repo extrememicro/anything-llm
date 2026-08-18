@@ -19,7 +19,8 @@ export default function FileUploadWarningModal({
   embedProgress = 0,
 }) {
   const { user } = useUser();
-  const canEmbed = !user || user.role !== "default";
+  const canEmbed =
+    !user || ["admin", "manager", "colaborador"].includes(user.role);
   if (!show) return null;
 
   if (isEmbedding) {

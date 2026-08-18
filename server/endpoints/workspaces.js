@@ -111,7 +111,7 @@ function workspaceEndpoints(app) {
     "/workspace/:slug/upload",
     [
       validatedRequest,
-      flexUserRoleValid([ROLES.admin, ROLES.manager, ROLES.colaborador]),
+      flexUserRoleValid([ROLES.admin, ROLES.manager]),
       validWorkspaceSlug,
       handleFileUpload,
     ],
@@ -181,7 +181,7 @@ function workspaceEndpoints(app) {
     "/workspace/:slug/upload-link",
     [
       validatedRequest,
-      flexUserRoleValid([ROLES.admin, ROLES.manager, ROLES.colaborador]),
+      flexUserRoleValid([ROLES.admin, ROLES.manager]),
       validWorkspaceSlug,
     ],
     async (request, response) => {
@@ -228,7 +228,7 @@ function workspaceEndpoints(app) {
     "/workspace/:slug/update-embeddings",
     [
       validatedRequest,
-      flexUserRoleValid([ROLES.admin, ROLES.manager, ROLES.colaborador]),
+      flexUserRoleValid([ROLES.admin, ROLES.manager]),
       validWorkspaceSlug,
     ],
     async (request, response) => {

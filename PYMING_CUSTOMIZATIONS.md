@@ -5,7 +5,7 @@ This branch adds a `colaborador` multi-user role. Collaborators can chat in assi
 ## Maintained differences
 
 - Backend role validation and role-selection hierarchy include `colaborador`.
-- Assigned-workspace upload, link processing, and embedding routes explicitly allow collaborators and retain workspace membership middleware. Global document, folder, watched-document, and purge operations remain manager/admin-only.
+- Assigned-workspace atomic upload-and-embed and user/workspace-scoped parsed-file embedding explicitly allow collaborators and retain workspace membership middleware before file upload. Standalone upload/link processing, global document-path embedding, folder, watched-document, and purge operations remain manager/admin-only.
 - Frontend role controls expose the role while hiding manager/admin navigation, settings, and the Manage Workspace document-library button.
 - PYMING's amd64 GHCR image is tested on pull requests and published only by trusted branch/tag pushes.
 - A weekly/manual workflow proposes merging the latest stable upstream release into `pyming`.
